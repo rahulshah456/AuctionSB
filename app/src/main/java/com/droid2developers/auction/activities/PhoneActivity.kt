@@ -1,11 +1,12 @@
-package com.droid2developers.auction
+package com.droid2developers.auction.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.droid2developers.auction.R
 
-class MainActivity : AppCompatActivity() {
+class PhoneActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_phone)
     }
 }

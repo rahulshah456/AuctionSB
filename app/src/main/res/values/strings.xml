@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Auction SB</string>
+    <string name="images">images</string>
+
+    <string name="app_info_1">Easy Online Auctions</string>
+    <string name="app_info_2">Sell Multiple Items</string>
+    <string name="app_info_3">Secured Auction Portal</string>
+    <string name="phone_login">Phone Login</string>
+    <string name="continue_">Continue</string>
+    <string name="verification">Verification</string>
+    <string name="enter_otp_message">Enter the OTP sent to your phone \n number for account verification</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="resend_code">Resend Code</string>
+    <string name="time">00:00</string>
 </resources>

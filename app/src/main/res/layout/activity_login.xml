@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".activities.LoginActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/skipButtonId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="24dp"
+        android:padding="12dp"
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:id="@+id/skipId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skip"
+            android:textSize="@dimen/_10ssp"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_round_chevron_right_24"
+            android:layout_toEndOf="@+id/skipId"/>
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/logoId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:transitionName="logo"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/headerId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome To"
+        android:textStyle="bold"
+        android:textSize="@dimen/_16ssp"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/logoId" />
+
+    <TextView
+        android:id="@+id/companyNameId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Secure Auction Portal"
+        android:textSize="@dimen/_18ssp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/headerId" />
+
+
+    <ImageView
+        android:id="@+id/pager_reverseId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        android:background="@drawable/ic_pager_reverse"
+        android:layout_centerInParent="true" />
+
+
+    <ImageView
+        android:id="@+id/pager_backId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        android:background="@drawable/ic_pager_back"
+        android:layout_centerInParent="true" />
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:clickable="false"
+        android:padding="@dimen/_32sdp"/>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/phoneLoginID"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_18sdp"
+        android:layout_marginEnd="@dimen/_18sdp"
+        android:backgroundTint="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="visible"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/gradient_one">
+
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Phone Login"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>
