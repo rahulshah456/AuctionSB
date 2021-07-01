@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:text="@string/phone_login"
             android:textStyle="bold"
+            android:textColor="@color/textColorPrimary"
             android:layout_centerInParent="true"
             android:textSize="@dimen/_14ssp"/>
 
@@ -32,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
+            android:src="@drawable/ic_round_close_24"
             android:layout_centerInParent="true"
             android:layout_alignParentEnd="true" />
 

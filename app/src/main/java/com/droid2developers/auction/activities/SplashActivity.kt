@@ -7,7 +7,7 @@ import com.droid2developers.auction.R
 import com.droid2developers.auction.utils.Constants.BIDDER_ACCOUNT
 import com.droid2developers.auction.utils.Constants.EXTRA_ACCOUNT_TYPE
 import com.droid2developers.auction.utils.Constants.EXTRA_PHONE_NUMBER
-import com.droid2developers.auction.utils.Constants.LOGIN_PROGRESS
+import com.droid2developers.auction.utils.Constants.EXTRA_LOGIN_PROGRESS
 import com.droid2developers.auction.utils.Constants.SKIPPED_ACCOUNT
 import com.droid2developers.auction.utils.SmartPreferences
 import com.google.firebase.FirebaseApp
@@ -37,8 +37,8 @@ class SplashActivity : AppCompatActivity() {
 
     private fun loginSession() {
 
-        val loginState = preferences?.getValue(LOGIN_PROGRESS, -1)
-        if (loginState == -1 || mAuth?.currentUser == null) {
+        val loginState = preferences?.getValue(EXTRA_LOGIN_PROGRESS, -1)
+        if (loginState == -1) {
             //default
             Logger.d("loginSession: default")
             launchActivity(Intent(this@SplashActivity, LoginActivity::class.java))
@@ -55,6 +55,12 @@ class SplashActivity : AppCompatActivity() {
             }
             1 -> {
                 //logged in
+                if (mAuth?.currentUser == null) {
+                    Logger.d("loginSession: authentication expired")
+                    launchActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                    return
+                }
+
                 val accountType = preferences?.getValue(EXTRA_ACCOUNT_TYPE, BIDDER_ACCOUNT)
                 Logger.d("loginSession:$accountType")
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)

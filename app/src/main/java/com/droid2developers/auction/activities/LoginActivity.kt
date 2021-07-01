@@ -4,22 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.preference.PreferenceManager
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.droid2developers.auction.R
 import com.droid2developers.auction.adapters.SlideShowAdapter
 import com.droid2developers.auction.utils.Constants.DELAY_SLIDE
-import com.droid2developers.auction.utils.Constants.LOGIN_PROGRESS
+import com.droid2developers.auction.utils.Constants.EXTRA_LOGIN_PROGRESS
 import com.droid2developers.auction.utils.Constants.PERIOD_SLIDE
 import com.droid2developers.auction.utils.SmartPreferences
 import com.google.android.material.card.MaterialCardView
@@ -126,7 +122,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         skipButton?.setOnClickListener {
-            preferences?.saveValue(LOGIN_PROGRESS, 2)
+            preferences?.saveValue(EXTRA_LOGIN_PROGRESS, 2)
             val intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
