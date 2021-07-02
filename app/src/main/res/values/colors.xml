@@ -10,6 +10,10 @@
 
     <color name="colorPrimary">#185ADB</color>
     <color name="background">#FFFFFF</color>
+
+
     <color name="textColorPrimary">#000000</color>
     <color name="textColorSecondary">#4C000000</color>
+    <color name="textColorPrimaryInverted">#FFFFFF</color>
+    <color name="textColorSecondaryInverted">#4CFFFFFF</color>
 </resources>

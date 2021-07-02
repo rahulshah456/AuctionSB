@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/homeId"
+        android:title="Home"
+        android:icon="@drawable/ic_round_home_24"/>
+
+    <item android:id="@+id/biddingsId"
+        android:title="My Biddings"
+        android:icon="@drawable/ic_baseline_account_balance_wallet_24"/>
+
+    <item android:id="@+id/accountId"
+        android:title="Account"
+        android:icon="@drawable/ic_round_account_circle_24"/>
+
+</menu>

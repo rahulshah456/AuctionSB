@@ -61,7 +61,7 @@ class SplashActivity : AppCompatActivity() {
                     return
                 }
 
-                val accountType = preferences?.getValue(EXTRA_ACCOUNT_TYPE, BIDDER_ACCOUNT)
+                val accountType = preferences?.getValue(EXTRA_ACCOUNT_TYPE, -1)
                 Logger.d("loginSession:$accountType")
                 val intent = Intent(this@SplashActivity, MainActivity::class.java)
                 intent.putExtra(EXTRA_ACCOUNT_TYPE, accountType)

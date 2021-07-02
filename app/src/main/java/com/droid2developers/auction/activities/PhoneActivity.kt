@@ -10,11 +10,10 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import com.droid2developers.auction.R
-import com.droid2developers.auction.models.AuctionAccount
+import com.droid2developers.auction.models.User
 import com.droid2developers.auction.models.PhoneRegistrations
 import com.droid2developers.auction.utils.Constants.ACCOUNT_TYPES
 import com.droid2developers.auction.utils.Constants.DATABASE_LOCATION_ACCOUNTS
@@ -63,9 +62,9 @@ class PhoneActivity : AppCompatActivity() {
     private var mVerificationId: String? = null
     private var mResendToken: ForceResendingToken? = null
     private var preferences: SmartPreferences? = null
+    private var timer: CountDownTimer? = null
 
     private var isVerified: Boolean = false
-    private var accountType = -1
     private var mVerificationInProgress = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -158,20 +157,16 @@ class PhoneActivity : AppCompatActivity() {
     private fun searchPhoneRegistration(): Single<Boolean> {
         return Single.create {
 
-            database?.collection(DATABASE_REGISTRATIONS)?.get()
-                ?.addOnSuccessListener { result ->
+            database?.collection(DATABASE_REGISTRATIONS)?.document(mAuth?.uid!!)?.get()
+                ?.addOnSuccessListener { document ->
                     var isRegistered = false
-                    if (result != null && result.isEmpty) {
-                        for (document in result) {
-                            Logger.d("${document.id} => ${document.data}")
-                            mRegistrations = document?.toObject(PhoneRegistrations::class.java)
-                            if (mRegistrations != null) {
-                                if (phoneNumberData == mRegistrations?.number
-                                    && ACCOUNT_TYPES.contains(mRegistrations?.accountType)){
-                                    accountType = mRegistrations?.accountType!!
-                                    isRegistered = true
-                                    break
-                                }
+                    if (document != null) {
+                        Logger.d("${document.id} => ${document.data}")
+                        mRegistrations = document.toObject(PhoneRegistrations::class.java)
+                        if (mRegistrations != null) {
+                            if (phoneNumberData == mRegistrations?.number
+                                && ACCOUNT_TYPES.contains(mRegistrations?.accountType)){
+                                isRegistered = true
                             }
                         }
                     }
@@ -185,9 +180,10 @@ class PhoneActivity : AppCompatActivity() {
     }
 
     private fun startCountDown() {
-        object : CountDownTimer(60000, 1000) {
+        if (timer != null) timer?.cancel()
+
+        timer = object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                Logger.d(millisUntilFinished)
                 if (millisUntilFinished / 1000 >= 10) {
                     codeCountdown?.text = String.format(Locale.ENGLISH, "00:%d",
                         millisUntilFinished / 1000)
@@ -198,12 +194,12 @@ class PhoneActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                Logger.d("CountDown Finished")
                 codeCountdown?.text = getString(R.string.init_time)
                 resendCode?.setTextColor(ContextCompat.getColor(applicationContext,
                     R.color.colorPrimary))
             }
-        }.start()
+        }
+        timer?.start()
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
@@ -291,11 +287,12 @@ class PhoneActivity : AppCompatActivity() {
 
         database?.collection(DATABASE_LOCATION_ACCOUNTS)?.document(mAuth?.uid!!)?.get()
             ?.addOnSuccessListener { document->
-                val userData = document?.toObject(AuctionAccount::class.java)
+                val userData = document?.toObject(User::class.java)
                 if (userData != null) {
                     //TODO - close progress
                     val gson = Gson()
                     val accountJson: String = gson.toJson(userData)
+                    Logger.d("Registered User: $accountJson")
                     preferences?.saveValue(EXTRA_ACCOUNT_DATA, accountJson)
                     preferences?.saveValue(EXTRA_ACCOUNT_TYPE, userData.accountType)
                     preferences?.saveValue(EXTRA_LOGIN_PROGRESS, 1)
@@ -315,6 +312,12 @@ class PhoneActivity : AppCompatActivity() {
         intent.putExtra(EXTRA_ACCOUNT_TYPE, accountType!!)
         startActivity(intent)
         finish()
+    }
+
+
+    override fun onDestroy() {
+        if (timer != null) timer?.cancel()
+        super.onDestroy()
     }
 
 }

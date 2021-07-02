@@ -1,21 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorOnPrimary"
-    tools:context=".activities.MainActivity">
+    android:id="@+id/parentLayoutId"
+    tools:context=".activities.MainActivity"
+    android:background="@color/background">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarId"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Auction Bidding!"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:elevation="0dp"
+        android:stateListAnimator="@null"
+        android:animateLayoutChanges="true">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/mtv_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Online Auction Portal"
+            app:subtitle="Trending Auctions"
+            app:subtitleTextColor="@color/white"
+            app:titleTextColor="@color/white"
+            android:layout_marginBottom="@dimen/_6sdp"
+            app:layout_scrollFlags="scroll|enterAlways"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/frameId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menu="@menu/navigation_2"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@color/background"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:labelVisibilityMode="labeled" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

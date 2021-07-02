@@ -1,9 +1,9 @@
 package com.droid2developers.auction.models
 
-data class AuctionAccount(
+data class User(
     val uid: String? = null,
-    val firstname: String? = null,
-    val lastname: String? = null,
+    val fname: String? = null,
+    val lname: String? = null,
     val email: String? = null,
     val address: String? = null,
     val country: String? = null,
@@ -18,4 +18,5 @@ data class AuctionAccount(
     val accountType: Int? = null,
     val biddingRatios: List<BiddingRatio?>? = null,
     val bidParticipations: List<Participation?>? = null,
+    val auctions: List<String?>? = null
 )
