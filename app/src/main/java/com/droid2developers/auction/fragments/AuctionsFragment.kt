@@ -13,10 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.droid2developers.auction.R
 import com.droid2developers.auction.activities.AuctionBidActivity
+import com.droid2developers.auction.activities.CreateAuctionActivity
 import com.droid2developers.auction.adapters.AuctionsAdapter
 import com.droid2developers.auction.models.Auction
 import com.droid2developers.auction.utils.Constants
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.orhanobut.logger.Logger
@@ -35,6 +37,11 @@ class AuctionsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         auctionsRecyclerView = view.findViewById(R.id.rv_main)
+        val createAuction = view.findViewById<FloatingActionButton>(R.id.fab_auction)
+
+        createAuction?.setOnClickListener {
+            startActivity(Intent(context, CreateAuctionActivity::class.java))
+        }
 
         generateRecyclerView()
         getAuctionsData()

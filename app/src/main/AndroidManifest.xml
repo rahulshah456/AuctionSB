@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AuctionSB">
-        <activity android:name=".activities.AuctionBidActivity"></activity>
+        <activity android:name=".activities.CreateAuctionActivity"></activity>
+        <activity android:name=".activities.AuctionBidActivity" />
         <activity android:name=".activities.PhoneActivity" />
         <activity android:name=".activities.CompleteActivity" />
         <activity android:name=".activities.LoginActivity" />

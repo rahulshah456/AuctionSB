@@ -13,8 +13,10 @@ import com.droid2developers.auction.adapters.TabAdapter
 import com.droid2developers.auction.fragments.BiddingFragment
 import com.droid2developers.auction.fragments.DescriptionFragment
 import com.droid2developers.auction.models.Auction
+import com.droid2developers.auction.models.User
 import com.droid2developers.auction.utils.Constants
 import com.droid2developers.auction.utils.Constants.DATABASE_BIDS
+import com.droid2developers.auction.utils.SmartPreferences
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.tabs.TabLayout
@@ -22,7 +24,9 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.gson.Gson
 import com.orhanobut.logger.Logger
+import java.util.*
 import kotlin.random.Random
 
 
@@ -84,13 +88,25 @@ class AuctionBidActivity : AppCompatActivity() {
         val db = FirebaseFirestore.getInstance()
         val bidsRef = db.collection(DATABASE_BIDS)
         val auth = FirebaseAuth.getInstance()
+        val preferences = SmartPreferences.getInstance(applicationContext)
+
+        var userName = auth.currentUser?.displayName
+        val account = preferences.getValue(Constants.EXTRA_ACCOUNT_DATA, "")
+        if (account != null) {
+            val gson = Gson()
+            val userAccount = gson.fromJson(account, User::class.java)
+            if (userAccount != null) {
+                userName = String.format(Locale.ENGLISH, "%s %s",
+                    userAccount.fname, userAccount.lname)
+            }
+        }
 
         val ref = bidsRef.document()
         val data = hashMapOf(
             "id" to ref.id,
             "bidderId" to auth.uid,
             "auctionId" to auction?.id,
-            "bidderName" to auth.currentUser?.displayName,
+            "bidderName" to userName,
             "bidValue" to bidValue,
             "timeStamp" to System.currentTimeMillis()
         )
